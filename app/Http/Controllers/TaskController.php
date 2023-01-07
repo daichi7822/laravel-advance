@@ -40,7 +40,7 @@ class TaskController extends Controller
         $rules = [
             'task' => 'required|max:20',
         ];
-        $messages = ['required' => '', 'max' => 'タスクは20文字以内で入力してください。'];
+        $messages = ['required' => '', 'max' => 'タスクは20文字以下で入力してください。'];
         Validator::make($request->all(), $rules, $messages)->validate();
 
         $task = new Task;
@@ -84,7 +84,7 @@ class TaskController extends Controller
         $rules = [
             'task' => 'required|max:20',
         ];
-        $messages = ['required' => '', 'max' => 'タスクは20文字以内で入力してください。'];
+        $messages = ['required' => '', 'max' => 'タスクは20文字以下で入力してください。'];
         Validator::make($request->all(), $rules, $messages)->validate();
 
         $task = Task::find($id);
