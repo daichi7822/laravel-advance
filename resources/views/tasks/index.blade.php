@@ -16,8 +16,9 @@
                 <p class="title mb-15">Todo List</p>
                 <div class="auth mb-15">
                     <p class="detail">「dtest」でログイン中</p>
-                    <form method="post" action="http://54.65.181.123/todo-advance/logout">
-                        <input type="hidden" name="_token" value="BTGJDhHwtOoejpWUYrjWUGXFIHbDAfPyucblMAts"> <input class="btn btn-logout" type="submit" value="ログアウト">
+                    <form method="post" action="{{ route('logout') }}">
+                        @csrf
+                        <input class="btn btn-logout" type="submit" value="ログアウト">
                     </form>
                 </div>
             </div>
@@ -63,11 +64,13 @@
                                 </td>
                                 <td>
                                     <select name="tag_id" class="select-tag">
-                                        <option selected value="1">家事</option>
-                                        <option value="2">勉強</option>
-                                        <option value="3">運動</option>
-                                        <option value="4">食事</option>
-                                        <option value="5">移動</option>
+                                        @foreach ($types as $type)
+                                            @if($type->id === $item->type)
+                                                <option value="{{ $type->id }}" selected>{{ $type->name }}</option>
+                                            @else
+                                                <option value="{{ $type->id }}">{{ $type->name }}</option>
+                                            @endif
+                                        @endforeach
                                     </select>
                                 </td>
                                 <td>

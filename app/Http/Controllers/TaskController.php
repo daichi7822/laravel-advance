@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Task;
+use App\Models\Type;
 use Illuminate\Support\Facades\Validator;
 
 class TaskController extends Controller
@@ -16,7 +17,8 @@ class TaskController extends Controller
     public function index()
     {
         $tasks = Task::all();
-        return view('tasks.index', compact('tasks'));
+        $types = Type::all();
+        return view('tasks.index', compact('tasks', 'types'));
     }
 
     /**
@@ -45,6 +47,7 @@ class TaskController extends Controller
 
         $task = new Task;
         $task->name = $request->input('task');
+        $task->type = $request->input('tag_id');
         $task->save();
 
         return redirect('/tasks');
